@@ -19,9 +19,7 @@ def save(album):
     VALUES (%s,%s,%s) RETURNING *"""
 
     values = [album.title, album.artist_id.id, album.genre]
-    print(values)
     results = run_sql(sql, values)
-    print(results)
     id = results[0]['id']
     album.id = id 
     return album 
@@ -62,8 +60,8 @@ def update(album):
     run_sql(sql, values)
 
 
-def album_by_artist(album):
+def album_by_artist(id):
     sql = """SELECT * FROM albums
     WHERE artist_id = (%s)"""
-    values = [album.title, album.artist_id.id, album.genre, album.id]
+    values = [id]
     run_sql(sql, values)
